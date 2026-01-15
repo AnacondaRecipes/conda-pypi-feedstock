@@ -25,17 +25,24 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
+    - importlib_resources  # [py<39]
   run:
     - python
     - conda >=23.9.0
     - pip >=23.0.1
+    - grayskull
+    - importlib_resources  # [py<39]
     - packaging
+    - pydantic >=2.10.0
     - unearth
     - python-build
     - python-installer
+    - requests
+    - ruamel.yaml
+    - typer
     - platformdirs
     - conda-index
-    - conda-libmamba-solver
+    - conda-package-streaming
 
 test:
   imports:
