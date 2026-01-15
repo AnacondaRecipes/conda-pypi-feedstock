@@ -12,33 +12,37 @@ source:
 build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 1
+  number: 0
   script:
-    - set -x  # [unix]
+    - set -x      # [unix]
     - "@ECHO ON"  # [win]
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
     - {{ PYTHON }} -c "from conda_pypi.python_paths import ensure_externally_managed; ensure_externally_managed()"
 
 requirements:
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
   host:
     - python
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
+    - importlib_resources  # [py<39]
   run:
     - python
     - conda >=23.9.0
     - pip >=23.0.1
+    - grayskull
+    - importlib_resources  # [py<39]
     - packaging
+    - pydantic >=2.10.0
     - unearth
     - python-build
     - python-installer
+    - requests
+    - ruamel.yaml
+    - typer
     - platformdirs
     - conda-index
-    - conda-libmamba-solver
+    - conda-package-streaming
 
 test:
   imports:
