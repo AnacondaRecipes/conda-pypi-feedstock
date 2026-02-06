@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 79d2ba6686ce2c66cd242f8a9e4a2c11824296abad00be48702baf70389f7630
+  sha256: 00ad0a22d7c7b4c71ac04164866d9b36a0acd3ed140ae27378d2ec451dd71452
 
 build:
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   number: 0
   script:
@@ -25,24 +25,17 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
-    - importlib_resources  # [py<39]
   run:
     - python
-    - conda >=23.9.0
+    - conda >=26.1.0
     - pip >=23.0.1
-    - grayskull
-    - importlib_resources  # [py<39]
     - packaging
-    - pydantic >=2.10.0
     - unearth
     - python-build
     - python-installer
-    - requests
-    - ruamel.yaml
-    - typer
     - platformdirs
-    - conda-index
-    - conda-package-streaming
+    - conda-index >=0.7.0
+    - conda-rattler-solver >=0.0.5
 
 test:
   imports:
