@@ -3,3 +3,4 @@ build_env_vars:
 
 channels:
   - https://staging.continuum.io/pbp/fs/unearth-feedstock/pr3/fb7ee3b
+  - https://staging.continuum.io/pbp/fs/conda-rattler-solver-feedstock/pr3/c74c838
