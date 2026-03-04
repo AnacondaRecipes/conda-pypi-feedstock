@@ -42,6 +42,8 @@ test:
   imports:
     - conda_pypi
     - conda_pypi.main
+  requires:
+    - pip
   commands:
     - python -m conda pypi --help  # Using 'conda pypi'  directly on Windows fails due to the actual 'base' conda being found earlier than test-env's conda
     - python -c "from conda_pypi.python_paths import get_env_stdlib; assert (get_env_stdlib() / 'EXTERNALLY-MANAGED').exists()"
@@ -65,3 +67,8 @@ extra:
     - ryanskeith
     - jaimergp
     - jezdez
+
+skip-lints:
+# conda-pypi needs pip and unearth for conversion
+  - python_build_tool_in_run
+  - python_build_tools_in_host
