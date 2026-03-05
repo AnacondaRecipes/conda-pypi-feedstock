@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.4.0" %}
+{% set version = "0.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 00ad0a22d7c7b4c71ac04164866d9b36a0acd3ed140ae27378d2ec451dd71452
+  sha256: 4330b12c0ec90ae7464718bf25af289d51296192c71d8b35843ff41b0a52f061
 
 build:
   skip: true  # [py<310]
@@ -25,6 +25,7 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
+    - python-build
   run:
     - python
     - conda >=26.1.0
@@ -41,20 +42,24 @@ test:
   imports:
     - conda_pypi
     - conda_pypi.main
+  requires:
+    - pip
   commands:
     - python -m conda pypi --help  # Using 'conda pypi'  directly on Windows fails due to the actual 'base' conda being found earlier than test-env's conda
     - python -c "from conda_pypi.python_paths import get_env_stdlib; assert (get_env_stdlib() / 'EXTERNALLY-MANAGED').exists()"
     - python -c "from conda_pypi.python_paths import get_env_stdlib; content = (get_env_stdlib() / 'EXTERNALLY-MANAGED').read_text(); assert '[externally-managed]' in content"
     - python -c "from conda_pypi.python_paths import get_env_stdlib; content = (get_env_stdlib() / 'EXTERNALLY-MANAGED').read_text(); assert 'conda pypi' in content"
     - python -m pip install requests && exit 1 || exit 0
+    - pip check
 
 about:
-  home: https://github.com/conda-incubator/conda-pypi
+  home: https://github.com/conda/conda-pypi
   license: MIT
+  license_family: MIT
   license_file: LICENSE
   summary: Better PyPI interoperability for the conda ecosystem
-  dev_url: https://github.com/conda-incubator/conda-pypi
-  doc_url: https://conda-incubator.github.io/conda-pypi
+  dev_url: https://github.com/conda/conda-pypi
+  doc_url: https://conda.github.io/conda-pypi
 
 extra:
   recipe-maintainers:
@@ -62,3 +67,8 @@ extra:
     - ryanskeith
     - jaimergp
     - jezdez
+
+skip-lints:
+# conda-pypi needs pip and unearth for conversion
+  - python_build_tool_in_run
+  - python_build_tools_in_host
