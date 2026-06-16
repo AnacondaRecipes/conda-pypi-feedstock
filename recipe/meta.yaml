@@ -23,7 +23,7 @@ requirements:
   host:
     - python
     - pip
-    - hatchling >=1.12.2
+    - hatchling >=1.26
     - hatch-vcs >=0.2.0
     - python-build
   run:
