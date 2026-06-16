@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.9.0" %}
+{% set version = "0.10.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: d9a75993d17c4269881e9a62a6971aed2c99b6b975eb7f6cd87977c8445a67e3
+  sha256: 179eac4ae82abe8441637df4e0b58aea6a09a56e02aaee9d167d4b2fd19793b3
 
 build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 1
+  number: 0
   script:
     - set -x      # [unix]
     - "@ECHO ON"  # [win]
@@ -23,7 +23,7 @@ requirements:
   host:
     - python
     - pip
-    - hatchling >=1.12.2
+    - hatchling >=1.26
     - hatch-vcs >=0.2.0
     - python-build
   run:
