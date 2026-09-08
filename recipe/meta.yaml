@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.11.0" %}
+{% set version = "0.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 9137327ffef74aaac7a95e5940b39e4bc333c77f05d22efeb199af6767e3b481
+  sha256: 8a07533ac47a15c4f3276da7e7d8cbc53a947aced76e1430964e2ec1b7b941a0
 
 build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  
   number: 0
   script:
     - set -x      # [unix]
@@ -30,13 +29,12 @@ requirements:
   run:
     - python
     - conda >=26.1.0
-    - pip >=23.0.1
     - packaging
     - unearth
     - python-build
     - python-installer >=1.0
     - platformdirs
-    - conda-index >=0.11.0
+    - conda-index >=0.12.0
     - conda-package-streaming >=0.11
 
 test:
