@@ -12,8 +12,7 @@ source:
 build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  # However, EXTERNALLY-MANAGED is temporarily disabled, so go back to noarch
-  noarch: python
+  # However, EXTERNALLY-MANAGED is temporarily disabled
   number: 0
   script:
     - set -x      # [unix]
