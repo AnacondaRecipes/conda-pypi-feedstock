@@ -13,7 +13,7 @@ build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 0
+  number: 1
   script:
     - set -x      # [unix]
     - "@ECHO ON"  # [win]
@@ -34,7 +34,7 @@ requirements:
     - python-build
     - python-installer >=1.0
     - platformdirs
-    - conda-index >=0.12.0
+    - conda-index >=0.13.0
     - conda-package-streaming >=0.11
 
 test:
