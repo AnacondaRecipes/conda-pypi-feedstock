@@ -64,8 +64,6 @@ extra:
     - ryanskeith
     - jaimergp
     - jezdez
-
-skip-lints:
-# conda-pypi needs pip and unearth for conversion
-  - python_build_tool_in_run
-  - python_build_tools_in_host
+  skip-lints:
+    # python-build and python-installer are used at runtime.
+    - python_build_tools_in_host
